@@ -18,6 +18,7 @@ CMakeSettings.json
 *.csproj.user
 **/.tmp/
 .cmake-*
+/dist
 
 # AI Coding (DO NOT submit)
 **/.claude

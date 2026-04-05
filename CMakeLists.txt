@@ -4,6 +4,7 @@ project(SweetEditorQt LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_AUTOMOC ON)
 
 if (WIN32)
     add_compile_definitions(NOMINMAX WIN32_LEAN_AND_MEAN)
@@ -23,8 +24,9 @@ set(MODULE_NAME ${CMAKE_PROJECT_NAME})
 set(DEMO_NAME ${CMAKE_PROJECT_NAME}Demo)
 
 file(GLOB_RECURSE SRC_FILES ${SRC_DIR}/*.cpp)
+file(GLOB_RECURSE HEADER_FILES ${INCLUDE_DIRS}/*.h)
 if (SRC_FILES)
-    add_library(${MODULE_NAME} ${SRC_FILES})
+    add_library(${MODULE_NAME} ${SRC_FILES} ${HEADER_FILES})
 else ()
     message(STATUS "No sources found under ${SRC_DIR}, configuring ${MODULE_NAME} as an interface target")
     add_library(${MODULE_NAME} INTERFACE)
@@ -113,7 +115,11 @@ else ()
     )
 endif ()
 
-add_executable(${DEMO_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp)
+add_executable(${DEMO_NAME}
+    ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/demo/DemoWindow.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/demo/DemoWindow.h
+)
 
 target_link_libraries(${DEMO_NAME} PRIVATE ${MODULE_NAME})
 

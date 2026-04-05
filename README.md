@@ -93,9 +93,62 @@ editor->applyTheme(sweeteditor::qt::EditorTheme::dark());
 editor->show();
 ```
 
-## Build Direction
+## Build
 
-SweetEditor-Qt currently builds as a Qt project that links against the OpenSweetEditor C++ static library. Build and integration documentation will be expanded as the Qt adaptation continues to take shape.
+SweetEditor-Qt currently builds as a Qt project that links against the OpenSweetEditor C++ static library.
+
+### CLion / CMake Prefix Path
+
+When opening this repository in CLion, make sure the CMake profile points `CMAKE_PREFIX_PATH` to the Qt kit root so that `find_package(Qt6 REQUIRED ...)` can resolve correctly.
+
+Example CMake option:
+
+```text
+-DCMAKE_PREFIX_PATH=D:\Qt\6.8.2\msvc2022_64
+```
+
+In CLion this is typically configured in:
+
+```text
+Settings / Build, Execution, Deployment / CMake / CMake options
+```
+
+You can also configure and build from the command line:
+
+```powershell
+cmake -S . -B .\cmake-build-release-visual-studio -DCMAKE_PREFIX_PATH=D:\Qt\6.8.2\msvc2022_64
+cmake --build .\cmake-build-release-visual-studio --config Release
+```
+
+### Windows Deployment Script
+
+This repository includes a PowerShell deployment script at [scripts/depoly-dist.ps1](scripts/depoly-dist.ps1).
+
+Release package example:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\depoly-dist.ps1 `
+  -QtPath D:\Qt\6.8.2\msvc2022_64 `
+  -BuildDir .\cmake-build-release-visual-studio `
+  -Config Release
+```
+
+Debug package example:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\depoly-dist.ps1 `
+  -QtPath D:\Qt\6.8.2\msvc2022_64 `
+  -BuildDir .\cmake-build-debug-visual-studio `
+  -Config Debug
+```
+
+Notes:
+
+- `QtPath` can be either the Qt kit root or its `bin` directory.
+- The script uses the specified `Config` strictly and does not auto-infer Debug/Release.
+- `BuildDir` and `Config` must match the actual executable you want to deploy.
+- Release builds are the intended form for end-user distribution.
+- The output directory is created under `dist/`, and the script also creates a zip package by default.
 
 ## Relationship to OpenSweetEditor
 

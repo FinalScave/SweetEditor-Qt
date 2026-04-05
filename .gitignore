@@ -28,5 +28,6 @@ CMakeSettings.json
 
 # Trae
 .trae/
+.qoder/
 # Local build folders
 /build-*/

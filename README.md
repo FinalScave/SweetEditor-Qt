@@ -122,7 +122,7 @@ cmake --build .\cmake-build-release-visual-studio --config Release
 
 ### Windows Deployment Script
 
-This repository includes a PowerShell deployment script at [scripts/depoly-dist.ps1](scripts/depoly-dist.ps1).
+This repository includes a PowerShell deployment script at [scripts/depoly-dist.ps1](Demo/scripts/depoly-dist.ps1).
 
 Release package example:
 

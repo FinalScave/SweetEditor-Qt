@@ -121,7 +121,7 @@ cmake --build .\cmake-build-release-visual-studio --config Release
 
 ### Windows 发布脚本
 
-仓库内提供了一个 PowerShell 发布脚本：[scripts/depoly-dist.ps1](scripts/depoly-dist.ps1)。
+仓库内提供了一个 PowerShell 发布脚本：[scripts/depoly-dist.ps1](Demo/scripts/depoly-dist.ps1)。
 
 Release 打包示例：
 

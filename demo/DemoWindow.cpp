@@ -260,7 +260,7 @@ QString resolveAssetCandidate(const QString& candidate) {
     return dir.absolutePath();
   }
 
-  const QString assets_dir = dir.filePath(QStringLiteral("assets"));
+  const QString assets_dir = dir.filePath(QStringLiteral("Demo/assets"));
   const QDir assets(assets_dir);
   if (assets.exists() && assets.exists(QStringLiteral("files"))) {
     return assets.absolutePath();
